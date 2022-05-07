@@ -33,7 +33,7 @@ def timeseriesplots(data: dict, ylabel= np.nan):
     fmt_month = mdates.MonthLocator()
     ax.xaxis.set_minor_locator(fmt_month)
 
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%Y'))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%Y'))
 
 
     datemin = np.datetime64(dates[0], 'Y')
@@ -42,7 +42,7 @@ def timeseriesplots(data: dict, ylabel= np.nan):
 
     ax.format_xdata = mdates.DateFormatter('%b-%Y')
 
-    ax.annotate('Average Water Vapor\nin South America', (0.91, 0.1), color='gray', xycoords='axes fraction', fontsize=9)
+    ax.annotate('Promedio de imagen\nsatelital para el vapor\nde agua en Sudamerica', (0.91, 0.1), color='gray', xycoords='axes fraction', fontsize=8)
 
     ax.set_facecolor('whitesmoke')
     ax.set_ylabel(ylabel)
@@ -66,14 +66,14 @@ def hist_kde(data, bwidth=0.13):
         bins = np.arange(min(data[location]['average']), max(data[location]['average']) + binwidth, binwidth)
 
         kwargs = dict(alpha=0.6, bins=bins)
-        n, bins, _ = ax.hist(data[location]['average'], density=True, stacked=True, **kwargs, label='Histogram', color='grey', histtype='barstacked', edgecolor='black', linewidth=0.5)
+        n, bins, _ = ax.hist(data[location]['average'], density=True, stacked=True, **kwargs, label='Histograma', color='grey', histtype='barstacked', edgecolor='black', linewidth=0.5)
 
         density = gaussian_kde(data[location]['average'], bw_method='silverman')
 
         density.covariance_factor = lambda :  bwidth
         density._compute_covariance()
         
-        ax.plot(bins, density(bins), color='grey', linewidth=2, label='KDE Probability density function',linestyle='-')
+        ax.plot(bins, density(bins), color='grey', linewidth=2, label='Función densidad de probabilidad',linestyle='-')
         
         plt.fill_between(
             bins, 
@@ -81,8 +81,8 @@ def hist_kde(data, bwidth=0.13):
             color= 'grey',
             alpha= 0.2)
 
-    ax.set_ylabel('Density')
-    ax.set_xlabel('Satellite Image Average (%)')
+    ax.set_ylabel('Densidad')
+    ax.set_xlabel('Intensidad promedio diaria(%)')
     ax.grid(color='darkgray', axis='y', which='major')
     ax.set_facecolor('whitesmoke')
 
