@@ -82,7 +82,7 @@ def hist_kde(data, bwidth=0.13):
             alpha= 0.2)
 
     ax.set_ylabel('Densidad')
-    ax.set_xlabel('Intensidad promedio diaria(%)')
+    ax.set_xlabel('Intensidad promedio(%)')
     ax.grid(color='darkgray', axis='y', which='major')
     ax.set_facecolor('whitesmoke')
 
